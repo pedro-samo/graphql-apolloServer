@@ -1,0 +1,21 @@
+{
+  "name": "graphql-apolloserver",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -r sucrase/register src/index.js"
+  },
+  "dependencies": {
+    "apollo-server": "2.23.0",
+    "graphql": "^15.5.1",
+    "sucrase": "^3.20.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
+  }
+}
