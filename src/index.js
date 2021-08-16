@@ -1,25 +1,14 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
+import fetch from 'node-fetch';
+import { typeDefs, resolvers } from './graphql/schema';
 
 const server = new ApolloServer({
-  typeDefs: gql`
-    type Query {
-      id: ID!
-      name: String!
-      age: Int!
-      average: Float
-      married: Boolean!
-      arrayString: [String!]!
-    }
-  `,
-  resolvers: {
-    Query: {
-      id: () => 1,
-      name: () => 'Pedro',
-      age: () => 30,
-      average: () => 12.3,
-      married: () => false,
-      arrayString: () => [null],
-    },
+  typeDefs,
+  resolvers,
+  context: () => {
+    return {
+      fetch,
+    };
   },
 });
 
