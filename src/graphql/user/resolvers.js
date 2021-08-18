@@ -1,12 +1,12 @@
-const users = async (_, __, { fetch }) => {
-  const users = await fetch('http://localhost:3000/users');
+const users = async (_, { input }, { getUsers }) => {
+  const apiFiltersInput = new URLSearchParams(input);
+  const users = await getUsers('/?' + apiFiltersInput);
   return users.json();
 };
 
-const user = async (_, { id }, { fetch }) => {
-  const response = await fetch('http://localhost:3000/users/' + id);
+const user = async (_, { id }, { getUsers }) => {
+  const response = await getUsers('/' + id);
   const user = await response.json();
-  console.log(user);
   return user;
 };
 
