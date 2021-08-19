@@ -1,23 +1,9 @@
+import DataLoader from 'dataloader';
+import fetch from 'node-fetch';
+
 const post = async (_, { id }, { getPosts }) => {
   const response = await getPosts('/' + id);
   const post = await response.json();
-
-  if (Math.random() > 0.5) {
-    return {
-      statusCode: 500,
-      message: 'Post TimeOut',
-      timeout: id,
-    };
-  }
-
-  if (typeof post.id === 'undefined') {
-    return {
-      statusCode: 404,
-      message: 'Post Not Found',
-      postId: id,
-    };
-  }
-
   return post;
 };
 
@@ -27,6 +13,19 @@ const posts = async (_, { input }, { getPosts }) => {
   return response.json();
 };
 
+const userDataLoader = new DataLoader(async (ids) => {
+  const urlQuery = ids.join('&id=');
+  const url = 'http://localhost:3000/users/?id=' + urlQuery;
+  const respose = await fetch(url);
+  const users = await respose.json();
+  return ids.map((id) => users.find((user) => user.id === id));
+});
+
+const user = async ({ userId }) => {
+  return userDataLoader.load(userId);
+};
+
 export const postResolvers = {
   Query: { post, posts },
+  Post: { user },
 };
