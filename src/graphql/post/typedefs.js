@@ -5,7 +5,6 @@ export const postTypeDefs = gql`
     post(id: ID!): Post!
     posts(input: ApiFiltersInput): [Post!]!
   }
-
   type Post {
     id: ID!
     title: String!
