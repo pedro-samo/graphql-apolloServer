@@ -10,16 +10,12 @@ const posts = async (_, { input }, { dataSources }) => {
 };
 
 // MUTATIONS
-const createPost = async (_, args, { dataSources }) => {
-  console.log('ARGS', args);
-  return {
-    id: '860',
-    title: 'Et voluptatem nulla omnis et iusto ullam.',
-    body: 'Ad non pariatur..',
-    userId: '29',
-    indexRef: 10,
-    createdAt: '2018-08-10T23:41:51.714Z',
-  };
+const createPost = async (_, { data }, { dataSources }) => {
+  return dataSources.postApi.createPost(data);
+};
+
+const updatePost = async (_, { postId, data }, { dataSources }) => {
+  return dataSources.postApi.updatePost(postId, data);
 };
 
 // FIELD RESOLVERS
@@ -29,6 +25,6 @@ const user = async ({ userId }, _, { dataSources }) => {
 
 export const postResolvers = {
   Query: { post, posts },
-  Mutation: { createPost },
+  Mutation: { createPost, updatePost },
   Post: { user },
 };
