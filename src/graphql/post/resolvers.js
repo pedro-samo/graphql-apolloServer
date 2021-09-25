@@ -1,20 +1,34 @@
-const post = async (_, { id }, { getPosts }) => {
-  const response = await getPosts('/' + id);
-  const post = await response.json();
+// QUERIES
+const post = async (_, { id }, { dataSources }) => {
+  const post = dataSources.postApi.getPost(id);
   return post;
 };
 
-const posts = async (_, { input }, { getPosts }) => {
-  const apiFiltersInput = new URLSearchParams(input);
-  const response = await getPosts('/?' + apiFiltersInput);
-  return response.json();
+const posts = async (_, { input }, { dataSources }) => {
+  const posts = dataSources.postApi.getPosts(input);
+  return posts;
 };
 
-const user = async ({ userId }, _, { userDataLoader }) => {
-  return userDataLoader.load(userId);
+// MUTATIONS
+const createPost = async (_, { data }, { dataSources }) => {
+  return dataSources.postApi.createPost(data);
+};
+
+const updatePost = async (_, { postId, data }, { dataSources }) => {
+  return dataSources.postApi.updatePost(postId, data);
+};
+
+const deletePost = async (_, { postId }, { dataSources }) => {
+  return dataSources.postApi.deletePost(postId);
+};
+
+// FIELD RESOLVERS
+const user = async ({ userId }, _, { dataSources }) => {
+  return dataSources.userApi.batchLoadById(userId);
 };
 
 export const postResolvers = {
   Query: { post, posts },
+  Mutation: { createPost, updatePost, deletePost },
   Post: { user },
 };
