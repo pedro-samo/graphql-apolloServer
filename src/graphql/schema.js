@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-core';
 import { apiFiltersResolvers } from './api-filters/resolvers';
 import { apiFiltersTypeDefs } from './api-filters/typedefs';
+import { loginResolvers } from './login/resolvers';
+import { loginTypedefs } from './login/typesdefs';
 import { postResolvers } from './post/resolvers';
 import { postTypeDefs } from './post/typedefs';
 import { userResolvers } from './user/resolvers';
@@ -24,15 +26,5 @@ const rootResolvers = {
   },
 };
 
-export const typeDefs = [
-  rootTypeDefs,
-  userTypeDefs,
-  postTypeDefs,
-  apiFiltersTypeDefs,
-];
-export const resolvers = [
-  rootResolvers,
-  userResolvers,
-  postResolvers,
-  apiFiltersResolvers,
-];
+export const typeDefs = [rootTypeDefs, userTypeDefs, postTypeDefs, apiFiltersTypeDefs, loginTypedefs];
+export const resolvers = [rootResolvers, userResolvers, postResolvers, apiFiltersResolvers, loginResolvers];

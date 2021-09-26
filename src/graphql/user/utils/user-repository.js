@@ -14,9 +14,7 @@ export const createUserFn = async (userData, dataSource) => {
   const foundUser = await userExists(userData.userName, dataSource);
 
   if (typeof foundUser !== 'undefined') {
-    throw new ValidationError(
-      `userName ${userData.userName} has already been taken`,
-    );
+    throw new ValidationError(`userName ${userData.userName} has already been taken`);
   }
 
   return dataSource.post('', {
@@ -35,9 +33,7 @@ export const updateUserFn = async (userId, userData, dataSource) => {
     const foundUser = await userExists(userData.userName, dataSource);
 
     if (typeof foundUser !== 'undefined' && foundUser.id !== userId) {
-      throw new ValidationError(
-        `userName ${userData.userName} has already been taken`,
-      );
+      throw new ValidationError(`userName ${userData.userName} has already been taken`);
     }
   }
 
