@@ -1,6 +1,10 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { makeUserDataLoader } from './dataloaders';
-import { createUserFn, updateUserFn, deleteUserFn } from './utils/user-repository';
+import {
+  createUserFn,
+  updateUserFn,
+  deleteUserFn,
+} from './utils/user-repository';
 
 export class UsersApi extends RESTDataSource {
   constructor() {

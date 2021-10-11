@@ -26,5 +26,17 @@ const rootResolvers = {
   },
 };
 
-export const typeDefs = [rootTypeDefs, userTypeDefs, postTypeDefs, apiFiltersTypeDefs, loginTypedefs];
-export const resolvers = [rootResolvers, userResolvers, postResolvers, apiFiltersResolvers, loginResolvers];
+export const typeDefs = [
+  rootTypeDefs,
+  userTypeDefs,
+  postTypeDefs,
+  apiFiltersTypeDefs,
+  loginTypedefs,
+];
+export const resolvers = [
+  rootResolvers,
+  userResolvers,
+  postResolvers,
+  apiFiltersResolvers,
+  loginResolvers,
+];
